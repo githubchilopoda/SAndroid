@@ -1,6 +1,8 @@
 package com.ss.sandroid;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends MBaseActivity {
 
@@ -12,7 +14,12 @@ public class MainActivity extends MBaseActivity {
     @Override
     public void initTitleBar() {
         initTitleView();
-        setTitleTextLeft("反回");
+        setTitleTextLeft("返回", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "返回", Toast.LENGTH_SHORT).show();
+            }
+        });
         setTitle(R.string.app_name);
     }
 

@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.annotation.StringRes;
 import android.support.v7.widget.Toolbar;
@@ -126,23 +127,26 @@ public abstract class MBaseActivity extends SSBaseActivity {
     /**
      * 设置标题栏左侧提示文字
      *
-     * @param resId
+     * @param resId           the resource identifier of the title left text.
+     * @param onClickListener The callback that will run
      */
-    protected void setTitleTextLeft(@StringRes int resId) {
-        setTitleTextLeft(getResources().getString(resId));
+    protected void setTitleTextLeft(@StringRes int resId, @Nullable View.OnClickListener onClickListener) {
+        setTitleTextLeft(getResources().getString(resId), onClickListener);
     }
 
     /**
      * 设置标题栏左侧提示文字
      *
-     * @param text The string value to the textView in title left;
+     * @param text            The string value to the textView in title left;
+     * @param onClickListener The callback that will run
      */
-    protected void setTitleTextLeft(CharSequence text) {
+    protected void setTitleTextLeft(CharSequence text, @Nullable View.OnClickListener onClickListener) {
         if (!isTitleEnable()) {
             throw new IllegalStateException("Base common Title is not unavailable, set fail !");
         }
         if (tvTitleLeft == null) {
             tvTitleLeft = (TextView) findViewById(R.id.base_title_bar).findViewById(R.id.tv_title_left);
+            tvTitleLeft.setOnClickListener(onClickListener);
         }
         tvTitleLeft.setText(text);
     }
@@ -179,23 +183,26 @@ public abstract class MBaseActivity extends SSBaseActivity {
     /**
      * 设置标题栏右侧提示文字
      *
-     * @param resId
+     * @param resId           the resource identifier of the title right text.
+     * @param onClickListener The callback that will run
      */
-    protected void setTitleTextRight(@StringRes int resId) {
-        setTitleTextRight(getResources().getString(resId));
+    protected void setTitleTextRight(@StringRes int resId, @Nullable View.OnClickListener onClickListener) {
+        setTitleTextRight(getResources().getString(resId), onClickListener);
     }
 
     /**
      * 设置标题栏右侧提示文字
      *
-     * @param text The string value to the textView in title right;
+     * @param text            The string value to the textView in title right;
+     * @param onClickListener The callback that will run
      */
-    protected void setTitleTextRight(CharSequence text) {
+    protected void setTitleTextRight(CharSequence text, @Nullable View.OnClickListener onClickListener) {
         if (!isTitleEnable()) {
             throw new IllegalStateException("Base common Title is not unavailable, set fail !");
         }
         if (tvTitleRight == null) {
             tvTitleRight = (TextView) findViewById(R.id.base_title_bar).findViewById(R.id.tv_title_right);
+            tvTitleRight.setOnClickListener(onClickListener);
         }
         tvTitleRight.setText(text);
     }
