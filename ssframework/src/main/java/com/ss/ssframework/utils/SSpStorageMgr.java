@@ -1,16 +1,13 @@
 package com.ss.ssframework.utils;
 
 import android.app.Activity;
-import android.content.Context;
 
 import android.content.SharedPreferences;
 
 import android.support.annotation.NonNull;
 
-import android.support.v4.util.SimpleArrayMap;
 
-
-import com.ss.ssframework.SApplication;
+import com.ss.ssframework.SSApplication;
 
 import java.util.Collections;
 
@@ -36,7 +33,7 @@ public class SSpStorageMgr {
 
     public SSpStorageMgr() {
         mPreferences =
-                SApplication.getAppContext().getSharedPreferences(PATH, Activity.MODE_PRIVATE);
+                SSApplication.getAppContext().getSharedPreferences(PATH, Activity.MODE_PRIVATE);
     }
 
     /**

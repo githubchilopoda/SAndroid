@@ -7,12 +7,12 @@ import android.util.Log;
  * Created by 健 on 2017/8/4.
  */
 
-public class SApplication extends Application {
+public class SSApplication extends Application {
 
     private final static String TAG = "FApplication";
-    private static SApplication instance;
+    private static SSApplication instance;
 
-    public static SApplication getAppContext()
+    public static SSApplication getAppContext()
     {
         return instance;
     }
