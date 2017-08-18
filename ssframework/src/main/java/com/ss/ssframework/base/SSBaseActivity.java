@@ -29,7 +29,7 @@ public abstract class SSBaseActivity extends AppCompatActivity implements IBaseV
     /**
      * 加载框
      * */
-    private LoadingDialog mLoadingDialog = new LoadingDialog(this);
+    private LoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,21 +87,30 @@ public abstract class SSBaseActivity extends AppCompatActivity implements IBaseV
 
     @Override
     public void showLoadingDialog(boolean cancelable) {
+        checkNoNullLoadingDialog();
         mLoadingDialog.show(cancelable);
     }
 
     @Override
     public void showLoadingDialog(boolean cancelable, Disposable d) {
+        checkNoNullLoadingDialog();
         mLoadingDialog.show(cancelable, d);
     }
 
     @Override
     public void showLoadingDialog(boolean cancelable, DialogInterface.OnDismissListener onDismissListener) {
+        checkNoNullLoadingDialog();
         mLoadingDialog.show(cancelable, onDismissListener);
     }
 
     @Override
     public void dismissLoadingDialog() {
         mLoadingDialog.dismiss();
+    }
+
+    private void checkNoNullLoadingDialog(){
+        if (mLoadingDialog == null){
+            mLoadingDialog = new LoadingDialog(this);
+        }
     }
 }

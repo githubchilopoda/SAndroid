@@ -27,7 +27,7 @@ public class MainActivity extends MBaseActivity {
 
     @Override
     public void onInit(Bundle savedInstanceState) {
-
+        showLoadingDialog(true);
     }
 
     @Override
