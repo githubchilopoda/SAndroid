@@ -2,8 +2,6 @@ package com.ss.sandroid;
 
 import android.os.Bundle;
 
-import io.reactivex.disposables.Disposable;
-
 public class MainActivity extends MBaseActivity {
 
     @Override
@@ -20,11 +18,6 @@ public class MainActivity extends MBaseActivity {
 
     @Override
     public void onInit(Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    public void onAttachView(Disposable d) {
 
     }
 }

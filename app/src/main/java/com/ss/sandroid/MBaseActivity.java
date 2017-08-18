@@ -50,8 +50,8 @@ public abstract class MBaseActivity extends SSBaseActivity {
 
     @Override
     public void initImmersionStatusBar() {
-        ImmersionStatusBar.initDef(this);
-//        ImmersionStatusBar.initDefFitSys(this);
+//        ImmersionStatusBar.initDef(this);
+        ImmersionStatusBar.initDefFitSys(this);
 //       ImmersionUtil.initColorfulDef(this, getResources().getColor(R.color.colorPrimaryDark),
 //                ImmersionUtil.STATUS_BAR_ALPHA_TRANSLUCENT);
 //        ImmersionUtil.initColorfulDefFitSys(this, getResources().getColor(R.color.colorPrimaryDark),
