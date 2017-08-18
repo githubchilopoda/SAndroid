@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import io.reactivex.disposables.Disposable;
+
 public class MainActivity extends MBaseActivity {
 
     @Override
@@ -25,6 +27,11 @@ public class MainActivity extends MBaseActivity {
 
     @Override
     public void onInit(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void onAttachView(Disposable d) {
 
     }
 }

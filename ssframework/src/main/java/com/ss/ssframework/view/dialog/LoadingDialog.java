@@ -42,39 +42,70 @@ public class LoadingDialog extends ProgressDialog implements DialogInterface.OnD
         getWindow().setAttributes(params);
         getWindow().setBackgroundDrawable(new ColorDrawable());
         this.getWindow().setDimAmount(0);   //背景高亮，否则是灰色的
-        setOnDismissListener(this);
     }
 
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
-        if(cancelable){
-            if (!disposable.isDisposed()){
+        if (cancelable) {
+            if (!disposable.isDisposed()) {
                 disposable.dispose();
             }
         }
     }
 
-    public void show(boolean cancelable, Disposable disposable){
+    /**
+     * 显示loadingDialog
+     *
+     * @param cancelable Whether the dialog should be canceled by user.
+     * @see {@link #setCancelable(boolean)}
+     */
+    public void show(boolean cancelable) {
+        this.cancelable = cancelable;
+        this.disposable = null;
+        setCancelable(cancelable);
+        setCanceledOnTouchOutside(cancelable);
+        setOnDismissListener(this);
+        super.show();
+    }
+
+    /**
+     * 显示loadingDialog，dialog消失时自动解除订阅
+     *
+     * @param cancelable dialog是否可以被用户主动取消.
+     * @param disposable 用于解除订阅
+     */
+    public void show(boolean cancelable, Disposable disposable) {
+        show(cancelable, disposable, this);
+    }
+
+    /**
+     * 显示loadingDialog
+     *
+     * @param cancelable        dialog是否可以被用户主动取消.
+     * @param onDismissListener loadingDialog 消失监听
+     */
+    public void show(boolean cancelable, OnDismissListener onDismissListener) {
+        show(cancelable, null, onDismissListener);
+    }
+
+    /**
+     * 显示loadingDialog
+     *
+     * @param cancelable        dialog是否可以被用户主动取消.
+     * @param disposable        用于解除订阅
+     * @param onDismissListener loadingDialog 消失监听
+     */
+    private void show(boolean cancelable, Disposable disposable, OnDismissListener onDismissListener) {
         this.cancelable = cancelable;
         this.disposable = disposable;
         setCancelable(cancelable);
         setCanceledOnTouchOutside(cancelable);
+        setOnDismissListener(onDismissListener);
         super.show();
     }
 
     @Override
     public void show() {
-        this.cancelable = false;
-        setCancelable(cancelable);
-        setCanceledOnTouchOutside(cancelable);
-        super.show();
-    }
-
-    public void setCacelable(boolean cacelable) {
-        this.cancelable = cacelable;
-    }
-
-    public void setDisposable(Disposable disposable) {
-        this.disposable = disposable;
+        show(false);
     }
 }

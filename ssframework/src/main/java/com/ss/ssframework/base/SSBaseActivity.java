@@ -1,16 +1,35 @@
 package com.ss.ssframework.base;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.ss.ssframework.view.dialog.LoadingDialog;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+
 /**
  * Created by 健 on 2017/8/15.
  */
 
-public abstract class SSBaseActivity extends AppCompatActivity{
+public abstract class SSBaseActivity extends AppCompatActivity implements IBaseView{
+
+    /**
+     * A disposable container that can hold onto multiple other disposables and
+     * offers O(1) add and removal complexity.
+     *
+     * @see {@link IBaseView#onAttachView(Disposable)}
+     * */
+    public CompositeDisposable mDisposables = new CompositeDisposable();
+
+    /**
+     * 加载框
+     * */
+    private LoadingDialog mLoadingDialog = new LoadingDialog(this);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,6 +43,12 @@ public abstract class SSBaseActivity extends AppCompatActivity{
         initImmersionStatusBar();
 
         onInit(savedInstanceState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mDisposables.dispose();
     }
 
     /**
@@ -58,4 +83,25 @@ public abstract class SSBaseActivity extends AppCompatActivity{
      * @see #onCreate(Bundle)
      */
     public abstract void onInit(Bundle savedInstanceState);
+
+
+    @Override
+    public void showLoadingDialog(boolean cancelable) {
+        mLoadingDialog.show(cancelable);
+    }
+
+    @Override
+    public void showLoadingDialog(boolean cancelable, Disposable d) {
+        mLoadingDialog.show(cancelable, d);
+    }
+
+    @Override
+    public void showLoadingDialog(boolean cancelable, DialogInterface.OnDismissListener onDismissListener) {
+        mLoadingDialog.show(cancelable, onDismissListener);
+    }
+
+    @Override
+    public void dismissLoadingDialog() {
+        mLoadingDialog.dismiss();
+    }
 }
