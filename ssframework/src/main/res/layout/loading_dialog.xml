@@ -1,0 +1,32 @@
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:paddingLeft="10px"
+    android:paddingRight="10px"
+    android:paddingBottom="5px"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/dialog_bg_loading"
+    android:orientation="vertical">
+
+    <com.zhy.autolayout.AutoRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/pb_load"
+            android:layout_width="110px"
+            android:layout_height="110px"
+            android:layout_centerHorizontal="true"
+            android:indeterminateDrawable="@drawable/dialog_bg_loading_progress" />
+        <TextView
+            android:id="@+id/tv_load_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/pb_load"
+            android:textSize="25px"
+            android:textColor="#c6c6c6"
+            android:text="轻稍后..."/>
+    </com.zhy.autolayout.AutoRelativeLayout>
+</com.zhy.autolayout.AutoLinearLayout>
