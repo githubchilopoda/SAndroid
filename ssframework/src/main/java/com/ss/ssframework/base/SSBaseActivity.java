@@ -87,19 +87,19 @@ public abstract class SSBaseActivity extends AppCompatActivity implements IBaseV
 
     @Override
     public void showLoadingDialog(boolean cancelable) {
-        checkNoNullLoadingDialog();
+        loadingDialogShowCheck();
         mLoadingDialog.show(cancelable);
     }
 
     @Override
-    public void showLoadingDialog(boolean cancelable, Disposable d) {
-        checkNoNullLoadingDialog();
-        mLoadingDialog.show(cancelable, d);
+    public void showLoadingDialog(Disposable d) {
+        loadingDialogShowCheck();
+        mLoadingDialog.show(d);
     }
 
     @Override
     public void showLoadingDialog(boolean cancelable, DialogInterface.OnDismissListener onDismissListener) {
-        checkNoNullLoadingDialog();
+        loadingDialogShowCheck();
         mLoadingDialog.show(cancelable, onDismissListener);
     }
 
@@ -108,9 +108,13 @@ public abstract class SSBaseActivity extends AppCompatActivity implements IBaseV
         mLoadingDialog.dismiss();
     }
 
-    private void checkNoNullLoadingDialog(){
+    private void loadingDialogShowCheck(){
         if (mLoadingDialog == null){
             mLoadingDialog = new LoadingDialog(this);
+        }
+        if (mLoadingDialog.isShowing()){
+            throw new IllegalStateException("Loading dialog is showing,"
+                    + " Only one can be displayed at the same time !");
         }
     }
 }

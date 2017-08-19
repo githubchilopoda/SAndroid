@@ -19,20 +19,17 @@ public interface IBaseView {
     void onAttachView(Disposable d);
 
     /**
-     * 显示loadingDialog
-     *
-     * @param cancelable Whether the dialog should be canceled by user.
-     * @see {@link android.app.Dialog#setCancelable(boolean)}
+     * 显示loadingDialog，用户不能主动取消
      */
     void showLoadingDialog(boolean cancelable);
 
     /**
-     * 显示loadingDialog
+     * 显示loadingDialog，用户可以主动取消
+     * dialog消失时自动解除订阅
      *
-     * @param cancelable Whether the dialog should be canceled by user.
      * @see {@link android.app.Dialog#setCancelable(boolean)}
      */
-    void showLoadingDialog(boolean cancelable, Disposable d);
+    void showLoadingDialog(Disposable d);
 
     /**
      * 显示loadingDialog

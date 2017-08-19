@@ -1,5 +1,6 @@
 package com.ss.sandroid;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -27,7 +28,12 @@ public class MainActivity extends MBaseActivity {
 
     @Override
     public void onInit(Bundle savedInstanceState) {
-        showLoadingDialog(true);
+        showLoadingDialog(true, new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                Toast.makeText(MainActivity.this, "dismiss", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

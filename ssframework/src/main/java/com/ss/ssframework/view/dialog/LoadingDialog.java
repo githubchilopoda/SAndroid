@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.WindowManager;
 
 import com.ss.ssframework.R;
@@ -45,7 +46,7 @@ public class LoadingDialog extends ProgressDialog implements DialogInterface.OnD
     }
 
     @Override
-    public void onDismiss(DialogInterface dialogInterface) {
+    public void onDismiss(DialogInterface dialog) {
         if (cancelable) {
             if (disposable != null && !disposable.isDisposed()) {
                 disposable.dispose();
@@ -60,22 +61,17 @@ public class LoadingDialog extends ProgressDialog implements DialogInterface.OnD
      * @see {@link #setCancelable(boolean)}
      */
     public void show(boolean cancelable) {
-        this.cancelable = cancelable;
-        this.disposable = null;
-        setCancelable(cancelable);
-        setCanceledOnTouchOutside(cancelable);
-        setOnDismissListener(this);
-        super.show();
+        show(cancelable, null);
     }
 
     /**
-     * 显示loadingDialog，dialog消失时自动解除订阅
+     * 显示loadingDialog，用户可以手动取消
+     * dialog消失时自动解除订阅
      *
-     * @param cancelable dialog是否可以被用户主动取消.
      * @param disposable 用于解除订阅
      */
-    public void show(boolean cancelable, Disposable disposable) {
-        show(cancelable, disposable, this);
+    public void show(@Nullable Disposable disposable) {
+        show(true, disposable, this);
     }
 
     /**
@@ -84,7 +80,7 @@ public class LoadingDialog extends ProgressDialog implements DialogInterface.OnD
      * @param cancelable        dialog是否可以被用户主动取消.
      * @param onDismissListener loadingDialog 消失监听
      */
-    public void show(boolean cancelable, OnDismissListener onDismissListener) {
+    public void show(boolean cancelable, @Nullable OnDismissListener onDismissListener) {
         show(cancelable, null, onDismissListener);
     }
 
@@ -95,17 +91,12 @@ public class LoadingDialog extends ProgressDialog implements DialogInterface.OnD
      * @param disposable        用于解除订阅
      * @param onDismissListener loadingDialog 消失监听
      */
-    private void show(boolean cancelable, Disposable disposable, OnDismissListener onDismissListener) {
+    private void show(boolean cancelable, @Nullable Disposable disposable, @Nullable OnDismissListener onDismissListener) {
         this.cancelable = cancelable;
         this.disposable = disposable;
         setCancelable(cancelable);
         setCanceledOnTouchOutside(cancelable);
         setOnDismissListener(onDismissListener);
         super.show();
-    }
-
-    @Override
-    public void show() {
-        show(false);
     }
 }
